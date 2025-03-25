@@ -25,7 +25,6 @@ RUN go build -mod=vendor -ldflags "-X github.com/prebid/prebid-cache/version.Ver
 FROM ubuntu:20.04 AS release
 LABEL maintainer="hans.hjort@xandr.com" 
 RUN apt-get update && \
-    apt-get install --assume-yes apt-utils && \
     apt-get install -y --no-install-recommends ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /usr/local/bin/
