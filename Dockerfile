@@ -20,7 +20,7 @@ RUN go mod vendor
 RUN go mod tidy
 ARG TEST="true"
 RUN if [ "$TEST" != "false" ]; then ./validate.sh ; fi
-RUN go build -mod=vendor -ldflags "-X github.com/prebid/prebid-cache/version.Ver=`git describe --tags` -X github.com/prebid/prebid-cache/version.Rev=`git rev-parse HEAD`" .
+RUN go build -mod=vendor -ldflags "-X github.com/prebid/prebid-cache/version.Ver=`git describe --tags 2>/dev/null || echo unknown` -X github.com/prebid/prebid-cache/version.Rev=`git rev-parse HEAD 2>/dev/null || echo unknown`" .
 
 FROM ubuntu:22.04 AS release
 LABEL maintainer="hans.hjort@xandr.com" 
